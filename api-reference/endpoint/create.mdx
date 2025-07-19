@@ -1,5 +1,49 @@
 ---
-title: "POST /api/api-keys"
 openapi: "POST /plants"
-description: " Creates a new API key. Accessible only by authenticated users."
+description: "# Create API Key
+
+Creates a new API key for the currently authenticated user.  
+The generated key will **only be shown once**, so please make sure to store it securely.
+
+---
+
+### Endpoint
+
+- **Method:** `POST`
+- **URL:** `/api/api-keys`
+- **Auth Required:** Yes (Bearer Token)
+
+---
+
+### Authorizations
+
+Authorization `string` `header` **required**
+
+> Bearer authentication header of the form `Bearer <token>`, where `<token>` is your auth token.
+
+---
+
+### Request Body
+
+No request body required.
+
+---
+
+### ✅ Success Response
+
+**HTTP 201 Created**
+
+```json
+{
+  "id": "6d83f8be-a35d-49b9-a5d0-53d90ae4cd45",
+  "keyName": "My App Key",
+  "apiKey": "u3PjRz2LbX5gQ8cTnY6mAeWsZk9fDdTx", 
+  "isActive": true,
+  "createdAt": "2025-07-19T14:28:00Z",
+  "expiresAt": "2025-08-19T14:28:00Z",
+  "accessScope": "read:messages write:contacts",
+  "warningMessage": "This API key will only be shown once. Please save it securely."
+}
+"
+title: "Create Plants"
 ---
