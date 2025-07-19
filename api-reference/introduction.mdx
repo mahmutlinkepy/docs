@@ -1,33 +1,31 @@
 ---
-title: 'Introduction'
-description: 'Example section for showcasing API endpoints'
+title: "Introduction"
+description: "This documentation is prepared for developers who want to integrate the Linkepy API. The API offers core features such as user management, link tracking, and notification delivery, all implemented using RESTful principles. With this API, developers can easily automate operations within the Linkepy platform."
 ---
 
-<Note>
-  If you're not looking to build API reference documentation, you can delete
-  this section by removing the api-reference folder.
-</Note>
+## Status Codes
 
-## Welcome
+Linkepy uses standard HTTP status codes to signal whether an API request was successful or not.\
+As a rule of thumb:
 
-There are two ways to build API documentation: [OpenAPI](https://mintlify.com/docs/api-playground/openapi/setup) and [MDX components](https://mintlify.com/docs/api-playground/mdx/configuration). For the starter kit, we are using the following OpenAPI specification.
+- **2xx codes** represent successful operations,
+- **4xx codes** indicate client-side errors caused by the data or request submitted.
 
-<Card
-  title="Plant Store Endpoints"
-  icon="leaf"
-  href="https://github.com/mintlify/starter/blob/main/api-reference/openapi.json"
->
-  View the OpenAPI specification file
-</Card>
+  | **Code** | **Name**          | **Summary**                                                                   |
+  | :------: | :---------------- | :---------------------------------------------------------------------------- |
+  | 200      | OK                | Everything worked as expected.                                                |
+  | 400      | Bad Request       | The request was unacceptable, often due to missing a required parameter.      |
+  | 401      | Unauthorized      | Invalid token provided in Authorization header                                |
+  | 402      | Payment Required  | You don’t have enough credits on your account to perform the request.         |
+  | 403      | Forbidden         | The API key doesn’t have permissions to perform the request.                  |
+  | 404      | Not Found         | The API didn’t find any result for this query.                                |
+  | 429      | Too Many Requests | The request was unacceptable due to too many request (see Rate limit bellow). |
+  | 500      | Server Error      | The request fail due to a server error.                                       |
 
-## Authentication
+## Rate Limiting
 
-All API endpoints are authenticated using Bearer tokens and picked up from the specification file.
+Each user is allowed to make up to **1000 requests per minute** to the API. This limit is enforced on the server side to maintain **performance and security** of the system.
 
-```json
-"security": [
-  {
-    "bearerAuth": []
-  }
-]
-```
+The rate limit ensures that high-usage users do not negatively impact those with lower usage, enabling **fair, balanced, and consistent** service delivery for all clients.
+
+The server evaluates the request rate based on user identity. If the limit is exceeded, requests may be throttled or rejected. This mechanism helps prevent API abuse and supports efficient use of backend resources.
