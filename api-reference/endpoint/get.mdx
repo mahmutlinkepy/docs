@@ -1,4 +1,56 @@
 ---
-title: "Get Plants"
 openapi: "GET /plants"
+description: "# Get API Keys
+
+Retrieves all API keys belonging to the currently authenticated user.
+
+---
+
+### **Endpoint**
+
+- **Method:** `GET`  
+- **URL:** `/api/api-keys`  
+- **Auth Required:** Yes (Bearer Token)
+
+---
+
+### **Authorizations**
+
+Authorization `string` `header` **required**
+
+> Bearer authentication header of the form `Bearer <token>`, where `<token>` is your auth token.
+
+---
+
+### **Request Body**
+
+No request body required.
+
+---
+
+### **✅ Success Response**
+
+**HTTP 200 OK**
+
+```json
+[
+  {
+    "id": "8c598e5b-4b41-4e5f-bfa7-ec2dd0e5f0ef",
+    "keyName": "My First API Key",
+    "isActive": true,
+    "createdAt": "2025-07-19T14:28:00Z",
+    "expiresAt": "2025-08-19T14:28:00Z",
+    "accessScope": "read:messages write:contacts"
+  },
+  {
+    "id": "128cdb1a-8c67-4c96-80a9-7f1b8d7c9aa4",
+    "keyName": "Integration Key",
+    "isActive": false,
+    "createdAt": "2025-06-15T10:00:00Z",
+    "expiresAt": null,
+    "accessScope": null
+  }
+]
+"
+title: "Get Plants"
 ---
