@@ -1,77 +1,55 @@
 ---
-title: "Reverse Email Lookup"
-description: "This operation allows you to find data from an email. It returns data profile and company information as the response. This operation consume 1 credit. "
+title: "Delete Plants"
 ---
 
-## 🔐 Authorizations
+### 📌 Endpoint
 
-| Name   | Type   | In    | Required |
-| :----- | :----- | :---- | :------- |
-| apikey | string | query | ✅        |
-
-`apikey` parametresi, geliştirici panelinden aldığınız API anahtarıdır ve zorunludur.
-
-## 📥 Query Parameters
-
-| Name            | Type   | Required | Description                         |
-| :-------------- | :----- | :------- | :---------------------------------- |
-| `email`         | string | ✅        | Sorgulanacak e-posta adresi         |
-| `firstName`     | string | ❌        | (Opsiyonel) Kişinin adı             |
-| `lastName`      | string | ❌        | (Opsiyonel) Kişinin soyadı          |
-| `companyDomain` | string | ❌        | (Opsiyonel) Şirket domaini / URL'si |
-| `companyName`   | string | ❌        | (Opsiyonel) Şirket adı              |
+- **Method:** `DELETE`
+- **URL:** `/api/api-keys/{id}`
+- **Auth Required:** Yes (Bearer Token)
+- **Permissions:** User must own the API key or be an admin.
 
 ---
 
-## ✅ Response — 200 OK
+### 🔐 Authentication
 
-```
-json
-```
-
-`{   "success": true,   "email": "johndoe@example.com",   "emailType": "personal",   "person": {     "fullName": "John Doe",     "location": "New York, USA",     "title": "Software Engineer",     "profilePicture": "https://example.com/johndoe.jpg",     "linkedInUrl": "https://linkedin.com/in/johndoe"   },   "credits_left": 1987,   "rate_limit_left": 94 } `
+> Requires Bearer Token in the `Authorization` header:
+> "
+>
+> ---
+>
+> ### 🔸 Parameters
+>
+> | Name | Type | Location | Description            |
+>
+> |------|------|----------|------------------------|
+>
+> | id   | UUID | Path     | ID of the API key to be deleted |
+>
+> ---
+>
+> ### ✅ Success Response
+>
+> **HTTP 204 No Content**
+>
+> No body is returned on success.
+>
+> ---
+>
+> ### ❌ Error Responses
+>
+> - **401 Unauthorized** – Token is missing or invalid.
+> - **403 Forbidden** – The API key does not belong to you.
+> - **404 Not Found** – The specified `id` was not found.
+>
+> ---
+>
+> ### 📘 Example Request
+>
+> \`\`\`http
+>
+> DELETE /api/api-keys/1a2b3c4d-5e6f-7g8h-9i0j-abc123def456
+>
+> Authorization: Bearer eyJhbGciOiJIUzI1...
 
 ---
-
-## 📤 Response Fields
-
-| Field             | Type    | Description                                                     |
-| :---------------- | :------ | :-------------------------------------------------------------- |
-| `success`         | boolean | API isteğinin başarılı olup olmadığını belirtir                 |
-| `email`           | string  | Sorgulanan e-posta adresi                                       |
-| `emailType`       | string  | E-posta türü (`personal`, `work`, vb.)                          |
-| `person`          | object  | Kişiye ait profil bilgilerini içeren nesne                      |
-| `credits_left`    | integer | Bu sorgudan sonra kalan kullanılabilir kredi sayısı             |
-| `rate_limit_left` | integer | Bu sorgudan sonra günlük kullanım limitinden kalan istek sayısı |
-
----
-
-## 💻 Example Request
-
-```
-bash
-```
-
-`curl --request GET \   --url 'https://api.example.com/enrichment?email=johndoe@example.com&apikey=YOUR_API_KEY' `
-
----
-
-## 💡 Example Usage
-
-\<Tabs\>   \<TabItem value="JavaScript" label="JavaScript"\>
-
-```
-js
-```
-
-`fetch("https://api.example.com/enrichment?email=johndoe@example.com&apikey=YOUR_API_KEY")   .then(res => res.json())   .then(data => console.log(data)); `
-
-\</TabItem\>   \<TabItem value="Python" label="Python"\>
-
-```
-python
-```
-
-`import requests  response = requests.get(   "https://api.example.com/enrichment",   params={     "email": "johndoe@example.com",     "apikey": "YOUR_API_KEY"   } )  print(response.json()) `
-
-\</TabItem\> \</Tabs\> \`\`\`
